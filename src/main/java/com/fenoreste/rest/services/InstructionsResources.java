@@ -364,7 +364,8 @@ public class InstructionsResources {
     }
 
     @POST
-    @Path("/monetary/execute")
+    //@Path("/monetary/execute")
+    @Path("/monetary/executar_transaccion")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     public Response executeMonetaryInstruction(String cadena, @HeaderParam("authorization") String authString) throws JSONException {

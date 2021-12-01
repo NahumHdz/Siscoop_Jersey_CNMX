@@ -116,7 +116,7 @@
     </dependencies>
     
     <build>
-        <finalName>Banca_Jersey</finalName>
+        <finalName>Banca_CNMX</finalName>
     </build>
     
     <properties>

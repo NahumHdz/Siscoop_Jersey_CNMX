@@ -54,16 +54,16 @@ public class TimerBeepClock implements Runnable {
         }
 
         //Actualizar Hora Servidor ---------------***************************************************---SOLO PARA PRUEBAS---***************************************************---------------------
-        if (hora.replace(" ", "").equals("00:01:00AM")) {
+        /*if (hora.replace(" ", "").equals("00:01:00AM")) {
             try {
                 actualizarFechaServidorBD();
             } catch (Exception e) {
                 System.out.println("ERROR AL ACTUALIZAR LA FECHA Y HORA EN LA BASE");
             }
-        }
+        }*/
 
         //Ejecutar Alertas
-        if (hora.replace(" ", "").equals("22:00:00PM")) {
+        if (hora.replace(" ", "").equals("08:00:00AM")) {
             try {
                 ejecutarAlerta();
             } catch (Exception e) {
@@ -88,7 +88,7 @@ public class TimerBeepClock implements Runnable {
     }
 
     //Cambio de Fecha y Hora de Base para las pruebas
-    public void actualizarFechaServidorBD() {
+    /*public void actualizarFechaServidorBD() {
         SimpleDateFormat dateFormatLocal = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String fechaActual = dateFormatLocal.format(new Date());
         //Timestamp timestamp = Timestamp.valueOf(fechaActual);
@@ -96,13 +96,13 @@ public class TimerBeepClock implements Runnable {
         EntityManager em = AbstractFacade.conexion();
         try {
             em.getTransaction().begin();
-            em.createNativeQuery("UPDATE origenes SET fechatrabajo = '" + fechaActual + "'").setParameter("fecha", fechaActual /*timestamp*/).executeUpdate();
+            em.createNativeQuery("UPDATE origenes SET fechatrabajo = '" + fechaActual + "'").setParameter("fecha", fechaActual).executeUpdate();
             em.getTransaction().commit();
             System.out.println("FECHA DE BASE ACTUALIZADA CORRECTAMENTE");
         } catch (Exception e) {
             System.out.println("ERROR AL ACTUALIZAR LA FECHA Y HORA EN LA BASE: " + e.getMessage());
         }
-    }
+    }*/
 
     //Parao obtener la ruta del servidor
     public static String ruta() {

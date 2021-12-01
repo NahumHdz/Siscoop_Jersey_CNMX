@@ -6,6 +6,7 @@
 package com.fenoreste.rest.Dao;
 
 import DTO.AccountHoldersDTO;
+import DTO.AccountHoldersValidateDTO;
 import DTO.Auxiliares_dDTO;
 import DTO.DetailsAccountDTO;
 import DTO.HoldsDTO;
@@ -56,12 +57,12 @@ public abstract class FacadeAccounts<T> {
 
     Utilidades Util = new Utilidades();
 
-    public List<AccountHoldersDTO> validateInternalAccount(String accountId) {
+    public List<AccountHoldersValidateDTO> validateInternalAccount(String accountId) {
         EntityManager em = AbstractFacade.conexion();
         opaDTO opa = Util.opa(accountId);
 
         System.out.println("AccountIDDDDDDDDDDDDD:" + accountId);
-        List<AccountHoldersDTO> holders = new ArrayList<AccountHoldersDTO>();
+        List<AccountHoldersValidateDTO> holders = new ArrayList<AccountHoldersValidateDTO>();
         try {
             String consulta = "SELECT * FROM auxiliares a WHERE "
                     + " a.idorigenp = " + opa.getIdorigenp() + " AND a.idproducto = " + opa.getIdproducto() + " AND a.idauxiliar = " + opa.getIdauxiliar();
@@ -74,8 +75,15 @@ public abstract class FacadeAccounts<T> {
         AuxiliaresPK auxpk = new AuxiliaresPK(o, p, a);
         Auxiliares aa = em.find(Auxiliares.class, auxpk);
              */
+            String o = String.format("%06d", aa.getIdorigen());
+            String g = String.format("%02d", aa.getIdgrupo());
+            String s = String.format("%06d", aa.getIdsocio());
+
+            String ogs = o + g + s;
             String persona = person.getNombre() + " " + person.getAppaterno() + " " + person.getApmaterno();
-            AccountHoldersDTO dto = new AccountHoldersDTO(persona, "SOW");
+
+            //AccountHoldersDTO dto = new AccountHoldersDTO(persona, "SOW");
+            AccountHoldersValidateDTO dto = new AccountHoldersValidateDTO(persona, "SOW", ogs);
             holders.add(dto);
         } catch (Exception e) {
             em.close();

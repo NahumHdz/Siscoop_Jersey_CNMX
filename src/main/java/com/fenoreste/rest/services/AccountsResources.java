@@ -2,6 +2,7 @@ package com.fenoreste.rest.services;
 
 import com.fenoreste.rest.Auth.Security;
 import DTO.AccountHoldersDTO;
+import DTO.AccountHoldersValidateDTO;
 import DTO.Auxiliares_dDTO;
 import DTO.DetailsAccountDTO;
 import DTO.HoldsDTO;
@@ -104,10 +105,18 @@ public class AccountsResources {
 
             } else {
                 int p = Integer.parseInt(accountId.substring(6, 11));
-                List<AccountHoldersDTO> listaHolder = acDao.validateInternalAccount(accountId);
-                AccountHoldersDTO holder = listaHolder.get(0);
+                List<AccountHoldersValidateDTO> listaHolder = acDao.validateInternalAccount(accountId);
+                AccountHoldersValidateDTO holder = listaHolder.get(0);
                 javax.json.JsonObject create = null;
-                create = Json.createObjectBuilder().add("accountId", accountId).add("accountType", acDao.accountType(p).toUpperCase()).add("holders", Json.createArrayBuilder().add((JsonValue) Json.createObjectBuilder().add("customerId", "01010110021543").add("name", holder.getName()).add("relationCode", holder.getRelationCode()).build())).add("displayAccountNumber", "*******510").build();
+                create = Json.createObjectBuilder().add("accountId", accountId)
+                        .add("accountType", acDao.accountType(p).toUpperCase())
+                        .add("holders", Json.createArrayBuilder()
+                                .add((JsonValue) Json.createObjectBuilder()
+                                        .add("customerId", holder.getCustomerId() /*"01010110021543"*/)
+                                        .add("name", holder.getName())
+                                        .add("relationCode", holder.getRelationCode()).build()))
+                        .add("displayAccountNumber", "***************" + accountId.substring(15, 19)).build();
+                /*.add("displayAccountNumber", "*******510").build();*/
                 return Response.status(Response.Status.OK).entity(create).build();
 
             }
@@ -204,10 +213,15 @@ public class AccountsResources {
                 String ff = String.valueOf(dto.getEntryDate()) + " 00:00:00";
                 Timestamp tss = Timestamp.valueOf(ff);
                 System.out.println("tss:" + tss);
-                ZonedDateTime zonedDateTime = ZonedDateTime.parse(dto.getEntryDate() + "T00:00:00.000-07:00");
+                ZonedDateTime zonedDateTime = ZonedDateTime.parse(dto.getEntryDate() + "T00:00:00.000-06:00");
                 String feR = String.valueOf(zonedDateTime);
                 System.out.println("feR:" + feR);
-                javax.json.JsonObject jsi = Json.createObjectBuilder().add("holdId", dto.getHoldId()).add("amount", Json.createObjectBuilder().add("amount", dto.getAmount().doubleValue()).add("currencyCode", "MXN").build()).add("entryDate", feR).add("description", dto.getDescritpion()).build();
+                javax.json.JsonObject jsi = Json.createObjectBuilder().add("holdId", dto.getHoldId())
+                                                                                                  .add("amount", Json.createObjectBuilder()
+                                                                                                          .add("amount", dto.getAmount().doubleValue())
+                                                                                                          .add("currencyCode", "MXN").build())
+                                                                                                  .add("entryDate", feR)
+                                                                                                  .add("description", dto.getDescritpion()).build();
                 listaJson.add((JsonValue) jsi);
             }
             javax.json.JsonObject Found = Json.createObjectBuilder().add("holds", listaJson).build();
@@ -291,7 +305,7 @@ public class AccountsResources {
                 fe = sdf.format(ax.getAuxiliaresDPK().getFecha());
                 System.out.println("Fe:" + fe + " " + ax.getCargoabono() + " " + ax.getMonto());
 
-                ZonedDateTime zonedDateTime = ZonedDateTime.parse(fe.replace("/", "-") + "T00:00:00.000-07:00");
+                ZonedDateTime zonedDateTime = ZonedDateTime.parse(fe.replace("/", "-") + "T00:00:00.000-06:00");
                 String feR = String.valueOf(zonedDateTime);
                 //System.out.println("DTOCtaOrigen:" + dto.getCuentaorigen());
                 referencia = ax.getIdorigenc() + "-" + ax.getPeriodo() + "-" + ax.getIdtipo() + "-" + ax.getIdpoliza();
