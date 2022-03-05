@@ -3,10 +3,7 @@ package com.fenoreste.rest.Entidades;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -16,10 +13,6 @@ public class transferencias_completadas_siscoop implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sec_validaciones_tsiscoop")
-    @SequenceGenerator(name = "sec_validaciones_tsiscoop", sequenceName = "sec_validaciones_tsiscoop")
-    private Integer id;
-
     private String customerId;
 
     private String tipotransferencia;
@@ -45,8 +38,7 @@ public class transferencias_completadas_siscoop implements Serializable {
     public transferencias_completadas_siscoop() {
     }
 
-    public transferencias_completadas_siscoop(Integer id, String customerId, String tipotransferencia, String cuentaorigen, String cuentadestino, Double monto, String comentario1, String comentario2, Date fechaejecucion, String tipoejecucion, boolean estatus, Double runningBalance) {
-        this.id = id;
+    public transferencias_completadas_siscoop(String customerId, String tipotransferencia, String cuentaorigen, String cuentadestino, Double monto, String comentario1, String comentario2, Date fechaejecucion, String tipoejecucion, boolean estatus, Double runningBalance) {
         this.customerId = customerId;
         this.tipotransferencia = tipotransferencia;
         this.cuentaorigen = cuentaorigen;
@@ -58,14 +50,6 @@ public class transferencias_completadas_siscoop implements Serializable {
         this.tipoejecucion = tipoejecucion;
         this.estatus = estatus;
         this.runningBalance = runningBalance;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getCustomerId() {
@@ -158,9 +142,7 @@ public class transferencias_completadas_siscoop implements Serializable {
 
     @Override
     public String toString() {
-        return "transferencias_completadas_siscoop{" + "id=" + id + ", customerId=" + customerId + ", tipotransferencia=" + tipotransferencia + ", cuentaorigen=" + cuentaorigen + ", cuentadestino=" + cuentadestino + ", monto=" + monto + ", comentario1=" + comentario1 + ", comentario2=" + comentario2 + ", fechaejecucion=" + fechaejecucion + ", tipoejecucion=" + tipoejecucion + ", estatus=" + estatus + ", runningBalance=" + runningBalance + '}';
+        return "transferencias_completadas_siscoop{" + "customerId=" + customerId + ", tipotransferencia=" + tipotransferencia + ", cuentaorigen=" + cuentaorigen + ", cuentadestino=" + cuentadestino + ", monto=" + monto + ", comentario1=" + comentario1 + ", comentario2=" + comentario2 + ", fechaejecucion=" + fechaejecucion + ", tipoejecucion=" + tipoejecucion + ", estatus=" + estatus + ", runningBalance=" + runningBalance + '}';
     }
-    
-    
 
 }

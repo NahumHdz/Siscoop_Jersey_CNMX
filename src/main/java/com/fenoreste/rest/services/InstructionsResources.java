@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.json.Json;
+import javax.json.JsonValue;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
@@ -156,6 +157,11 @@ public class InstructionsResources {
         String annio = Integer.toString(c1.get(1));
         String FechaTiempoReal = String.format("%04d", Integer.parseInt(annio)) + "-" + String.format("%02d", Integer.parseInt(mes)) + "-" + String.format("%02d", Integer.parseInt(dia));
         int identificadorTransferencia = 0;
+        
+        JSONObject mon_op = request.getJSONObject("monetaryOptions");
+        JSONObject fec_exe = mon_op.getJSONObject("execution");
+        fechaEjecucion = fec_exe.getString("executionDate");
+        //System.out.println("FECHA EJECUCIONNNNNNNNNNNNNNNNNNNN: " + fechaEjecucion);
 
         try {
             //Transferencias TIPOS BILLER(Pago de servicios)
@@ -264,60 +270,73 @@ public class InstructionsResources {
         }
 
         try {
-
-            //Es una transferencia a mis cuentas propias
-            if (identificadorTransferencia == 1) {
-                System.out.println("ennnnnnnnnntrooooooooooooooooooooooooooooooooooooooooooooooo");
-                dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, comentario, propCuenta, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
-                //dto = dao.validateMonetaryInstruction(customerId,cuentaOrigen, cuentaDestino, monto, "Pago de servicios:" + comentario, "Codigo recibo:" + value, fechaEjecucion, tipoEjecucion,identificadorTransferencia);
-                jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
-                        .add("fees", Json.createArrayBuilder().build())
-                        .add("executionDate", dto.getExecutionDate())
-                        .build();
-            } else if (identificadorTransferencia == 2) {
-                dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, comentario, propCuenta, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
-                jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
-                        .add("fees", Json.createArrayBuilder().build())
-                        .add("executionDate", dto.getExecutionDate())
-                        .build();
-            } else if (identificadorTransferencia == 3) {
-                dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, comentario, propCuenta, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
-                System.out.println("dto:" + dto);
-                jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
-                        .add("fees", Json.createArrayBuilder().build())
-                        .add("executionDate", dto.getExecutionDate())
-                        .build();
-            } else if (identificadorTransferencia == 4) {
-                dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, "Pago de servicio:" + comentario, propCuenta, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
-                jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
-                        .add("fees", Json.createArrayBuilder().build())
-                        .add("executionDate", dto.getExecutionDate())
-                        .build();
-            } else if (identificadorTransferencia == 5) {
-                dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, comentario, cuentaDestino, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
-                jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
-                        .add("fees", Json.createArrayBuilder().build())
-                        .add("executionDate", dto.getExecutionDate())
-                        .build();
-            } else if (identificadorTransferencia == 6) {
-                dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, "Txt Programada" + comentario, cuentaDestino, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
-                jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
-                        .add("fees", Json.createArrayBuilder().build())
-                        .add("executionDate", dto.getExecutionDate())
-                        .build();
-            } else if (identificadorTransferencia == 7) {
-                dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, "Txt Programada" + comentario, cuentaDestino, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
-                jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
-                        .add("fees", Json.createArrayBuilder().build())
-                        .add("executionDate", dto.getExecutionDate())
-                        .build();
-            } else if (identificadorTransferencia == 8) {
-                dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, "Txt Programada" + comentario, cuentaDestino, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
-                jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
-                        .add("fees", Json.createArrayBuilder().build())
-                        .add("executionDate", dto.getExecutionDate())
-                        .build();
-
+            System.out.println("FECHA HOY:  " + FechaTiempoReal + " FECHA EJECUCION: " + fechaEjecucion);
+            
+            if (FechaTiempoReal.equals(fechaEjecucion)) {
+                System.out.println("FECHAS IGUALES");
+                
+                //Es una transferencia a mis cuentas propias
+                if (identificadorTransferencia == 1) {
+                    System.out.println("ennnnnnnnnntrooooooooooooooooooooooooooooooooooooooooooooooo");
+                    dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, comentario, propCuenta, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
+                    //dto = dao.validateMonetaryInstruction(customerId,cuentaOrigen, cuentaDestino, monto, "Pago de servicios:" + comentario, "Codigo recibo:" + value, fechaEjecucion, tipoEjecucion,identificadorTransferencia);
+                    jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
+                            .add("fees", Json.createArrayBuilder().build())
+                            .add("executionDate", dto.getExecutionDate())
+                            .build();
+                } else if (identificadorTransferencia == 2) {
+                    dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, comentario, propCuenta, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
+                    jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
+                            .add("fees", Json.createArrayBuilder().build())
+                            .add("executionDate", dto.getExecutionDate())
+                            .build();
+                } else if (identificadorTransferencia == 3) {
+                    dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, comentario, propCuenta, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
+                    System.out.println("dto:" + dto);
+                    jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
+                            .add("fees", Json.createArrayBuilder().build())
+                            .add("executionDate", dto.getExecutionDate())
+                            .build();
+                } else if (identificadorTransferencia == 4) {
+                    dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, "Pago de servicio:" + comentario, propCuenta, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
+                    jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
+                            .add("fees", Json.createArrayBuilder().build())
+                            .add("executionDate", dto.getExecutionDate())
+                            .build();
+                } else if (identificadorTransferencia == 5) {
+                    dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, comentario, cuentaDestino, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
+                    jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
+                            .add("fees", Json.createArrayBuilder().build())
+                            .add("executionDate", dto.getExecutionDate())
+                            .build();
+                } else if (identificadorTransferencia == 6) {
+                    dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, "Txt Programada" + comentario, cuentaDestino, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
+                    jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
+                            .add("fees", Json.createArrayBuilder().build())
+                            .add("executionDate", dto.getExecutionDate())
+                            .build();
+                } else if (identificadorTransferencia == 7) {
+                    dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, "Txt Programada" + comentario, cuentaDestino, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
+                    jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
+                            .add("fees", Json.createArrayBuilder().build())
+                            .add("executionDate", dto.getExecutionDate())
+                            .build();
+                } else if (identificadorTransferencia == 8) {
+                    dto = dao.validateMonetaryInstruction(customerId, cuentaOrigen, cuentaDestino, monto, "Txt Programada" + comentario, cuentaDestino, fechaEjecucion, tipoEjecucion, tipoTranferencia, identificadorTransferencia);
+                    jsonResponse = Json.createObjectBuilder().add("validationId", dto.getValidationId())
+                            .add("fees", Json.createArrayBuilder().build())
+                            .add("executionDate", dto.getExecutionDate())
+                            .build();
+                }
+            } else {
+                System.out.println("FECHAS DIFERENTES");
+                jsonResponse = Json.createObjectBuilder().add("type", "urn:vn:error-codes:VAL00001")
+                                                                                    .add("title", "Validation failed on submitted data")
+                                                                                    .add("errors", (JsonValue) Json.createArrayBuilder()
+                                                                                            .add((JsonValue) Json.createObjectBuilder()
+                                                                                                    .add("code", "W0015")
+                                                                                                    .add("message", "Fecha de ejecución inválida").build()).build())
+                                                                                    .build();
             }
 
             /*
@@ -364,8 +383,8 @@ public class InstructionsResources {
     }
 
     @POST
-    //@Path("/monetary/execute")
-    @Path("/monetary/executar_transaccion")
+    @Path("/monetary/execute")
+    /*@Path("/monetary/executar_transaccion")*/
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     public Response executeMonetaryInstruction(String cadena, @HeaderParam("authorization") String authString) throws JSONException {
@@ -445,7 +464,7 @@ public class InstructionsResources {
                                         .add("value","Value")
                                         .add("valueType","string")
                                         .add("description","Description").build())*/
-                            .add("monetaryInstructionId", String.valueOf(transferencia.getId()))
+                            .add("monetaryInstructionId", String.valueOf(transferencia.getCustomerId()))
                             .add("customerId", transferencia.getCustomerId())
                             .add("originatorTransactionType", transferencia.getTipotransferencia())
                             .add("debitAccount", Json.createObjectBuilder()

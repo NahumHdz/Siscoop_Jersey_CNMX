@@ -14,6 +14,7 @@ import DTO.opaDTO;
 import com.fenoreste.rest.Util.AbstractFacade;
 import com.fenoreste.rest.Entidades.Auxiliares;
 import com.fenoreste.rest.Entidades.AuxiliaresD;
+import com.fenoreste.rest.Entidades.AuxiliaresDPK;
 import com.fenoreste.rest.Entidades.AuxiliaresPK;
 import com.fenoreste.rest.Entidades.Persona;
 import com.fenoreste.rest.Entidades.PersonasPK;
@@ -34,6 +35,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.OutputStreamWriter;
+import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -220,7 +222,7 @@ public abstract class FacadeAccounts<T> {
                                 fbloqueo = sdf.format(aa.getFechaape());
                             }
                             HoldsDTO dto = new HoldsDTO(accountId,
-                                    Double.parseDouble(a.getGarantia().toString()),
+                                    Double.parseDouble(aa.getGarantia().toString()),/*a.getGarantia().toString()),*/
                                     fbloqueo,
                                     pr.getNombre());
                             System.out.println("DTO:" + dto);
@@ -281,9 +283,9 @@ public abstract class FacadeAccounts<T> {
                         + " AND monto between " + Double.parseDouble(montos.get(0)) + " AND " + Double.parseDouble(montos.get(1))
                         + " AND " + complemento_transaction_type
                         + " ORDER BY fecha DESC LIMIT " + count;
-                //Si solo esta marcado fecha,monto,transactionType
-            } else if (fechas.size() > 0 && montos.size() > 0 && !transactionType.equals("") && count == 0) {
-
+            }
+            //Si solo esta marcado fecha,monto,transactionType
+            else if (fechas.size() > 0 && montos.size() > 0 && !transactionType.equals("") && count == 0) {
                 if (transactionType.equals("A")) {
                     complemento_transaction_type = " cargoabono in(0,1)";
                 } else if (transactionType.equals("C")) {
@@ -298,7 +300,9 @@ public abstract class FacadeAccounts<T> {
                         + " AND monto between " + Double.parseDouble(montos.get(0)) + " AND " + Double.parseDouble(montos.get(1))
                         + " AND " + complemento_transaction_type
                         + " ORDER BY fecha DESC";
-            } else if (fechas.size() > 0 && montos.size() > 0 && transactionType.equals("") && count == 0) {//Si solo esta marcado fechas y montos
+            }
+            //Si solo esta marcado fechas y montos
+            else if (fechas.size() > 0 && montos.size() > 0 && transactionType.equals("") && count == 0) {
                 System.out.println("Fechas y montos");
                 sulta = " idorigenp = " + opa.getIdorigenp()
                         + " AND idproducto = " + opa.getIdproducto()
@@ -306,14 +310,18 @@ public abstract class FacadeAccounts<T> {
                         + " AND date(fecha) between '" + fechas.get(0).trim() + "' AND '" + fechas.get(1).trim() + "'"
                         + " AND monto between " + Double.parseDouble(montos.get(0)) + " AND " + Double.parseDouble(montos.get(1))
                         + " ORDER BY fecha DESC";
-            } else if (fechas.size() > 0 && montos.size() == 0 && transactionType.equals("") && count == 0) {//Si solo fechas
+            }
+            //Si solo fechas
+            else if (fechas.size() > 0 && montos.size() == 0 && transactionType.equals("") && count == 0) {
                 System.out.println("entroooooooooooooo aqui");
                 sulta = " idorigenp = " + opa.getIdorigenp()
                         + " AND idproducto = " + opa.getIdproducto()
                         + " AND idauxiliar = " + opa.getIdauxiliar()
                         + " AND date(fecha) between '" + fechas.get(0).trim() + "' AND '" + fechas.get(1).trim() + "'"
                         + " ORDER BY fecha DESC";
-            } else if (fechas.size() > 0 && montos.size() == 0 && !transactionType.equals("") && count > 0) {//Si solo vienen fechas,tipo transaccion y contador
+            }
+            //Si solo vienen fechas,tipo transaccion y contador
+            else if (fechas.size() > 0 && montos.size() == 0 && !transactionType.equals("") && count > 0) {
                 System.out.println("Fechas,tipo transaccion y count");
                 if (transactionType.equals("A")) {
                     complemento_transaction_type = " cargoabono in(0,1)";
@@ -327,7 +335,9 @@ public abstract class FacadeAccounts<T> {
                         + " AND idauxiliar = " + opa.getIdauxiliar()
                         + " AND " + complemento_transaction_type
                         + " AND date(fecha) between '" + fechas.get(0).trim() + "' AND '" + fechas.get(1).trim() + "' ORDER BY fecha DESC LIMIT " + count;
-            } else if (fechas.size() > 0 && montos.size() == 0 && !transactionType.equals("") && count == 0) {//Si solo viene fecha,tipos de transacccion
+            }
+            //Si solo viene fecha,tipos de transacccion
+            else if (fechas.size() > 0 && montos.size() == 0 && !transactionType.equals("") && count == 0) {
                 if (transactionType.equals("A")) {
                     complemento_transaction_type = " cargoabono in(0,1)";
                 } else if (transactionType.equals("C")) {
@@ -342,14 +352,18 @@ public abstract class FacadeAccounts<T> {
                         + " AND date(fecha) between '" + fechas.get(0).trim() + "' AND '" + fechas.get(1).trim() + "'"
                         + " ORDER BY fecha DESC";
 
-            } else if (fechas.size() > 0 && montos.size() == 0 && transactionType.equals("") && count > 0) {//Solo fecha y contador
+            }
+            //Solo fecha y contador
+            else if (fechas.size() > 0 && montos.size() == 0 && transactionType.equals("") && count > 0) {
                 System.out.println("aquiiiiiiiiiiiiiiiiiiiiiiiii");
                 sulta = " idorigenp = " + opa.getIdorigenp()
                         + " AND idproducto = " + opa.getIdproducto()
                         + " AND idauxiliar = " + opa.getIdauxiliar()
                         + " AND " + complemento_transaction_type
                         + " AND date(fecha) between '" + fechas.get(0).trim() + "' AND '" + fechas.get(1).trim() + "' ORDER BY fecha DESC LIMIT " + count;
-            } else if (fechas.size() == 0 && montos.size() > 0 && !transactionType.equals("") && count > 0) {//Si solo montos,tipo de transaccion y contador de operacions
+            }
+            //Si solo montos,tipo de transaccion y contador de operacions
+            else if (fechas.size() == 0 && montos.size() > 0 && !transactionType.equals("") && count > 0) {
                 System.out.println("aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
                 if (transactionType.equals("A")) {
                     complemento_transaction_type = " cargoabono in(0,1)";
@@ -363,27 +377,33 @@ public abstract class FacadeAccounts<T> {
                         + " AND idauxiliar = " + opa.getIdauxiliar()
                         + " AND " + complemento_transaction_type
                         + " AND monto between  " + Double.parseDouble(montos.get(0)) + " AND " + Double.parseDouble(montos.get(1)) + " ORDER BY fecha DESC LIMIT " + count;
-
-            } else if (fechas.size() == 0 && montos.size() > 0 && transactionType.equals("") && count > 0) {//Si solo montos y tipo de transaccion
+            }
+            //Si solo montos y tipo de transaccion
+            else if (fechas.size() == 0 && montos.size() > 0 && transactionType.equals("") && count > 0) {
                 sulta = " idorigenp = " + opa.getIdorigenp()
                         + " AND idproducto = " + opa.getIdproducto()
                         + " AND idauxiliar = " + opa.getIdauxiliar()
                         + " AND " + complemento_transaction_type
                         + " AND monto between " + Double.parseDouble(montos.get(0)) + " AND " + Double.parseDouble(montos.get(1))
                         + " ORDER BY fecha DESC";
-            } else if (fechas.size() == 0 && montos.size() > 0 && transactionType.equals("") && count > 0) { //Si solo montos y contador de operaciones
+            }
+            //Si solo montos y contador de operaciones
+            else if (fechas.size() == 0 && montos.size() > 0 && transactionType.equals("") && count > 0) {
                 sulta = " idorigenp = " + opa.getIdorigenp()
                         + " AND idproducto = " + opa.getIdproducto()
                         + " AND idauxiliar = " + opa.getIdauxiliar()
                         + " AND monto between " + Double.parseDouble(montos.get(0)) + " AND " + Double.parseDouble(montos.get(1)) + " ORDER BY fecha DESC LIMIT " + count;
-
-            } else if (fechas.size() == 0 && montos.size() == 0 && transactionType.equals("") && count == 0) {//solo monto
+            }
+            //solo monto
+            else if (fechas.size() == 0 && montos.size() == 0 && transactionType.equals("") && count == 0) {
                 sulta = " idorigenp = " + opa.getIdorigenp()
                         + " AND idproducto = " + opa.getIdproducto()
                         + " AND idauxiliar = " + opa.getIdauxiliar()
                         + " AND monto between " + Double.parseDouble(montos.get(0)) + " AND " + Double.parseDouble(montos.get(1))
                         + " ORDER BY fecha DESC";
-            } else if (fechas.size() == 0 && montos.size() == 0 && !transactionType.equals("") && count > 0) {//Solo tipo de transaccion y contador
+            }
+            //Solo tipo de transaccion y contador
+            else if (fechas.size() == 0 && montos.size() == 0 && !transactionType.equals("") && count > 0) {
                 if (transactionType.equals("A")) {
                     complemento_transaction_type = " cargoabono in(0,1)";
                 } else if (transactionType.equals("C")) {
@@ -396,8 +416,54 @@ public abstract class FacadeAccounts<T> {
                         + " AND idauxiliar = " + opa.getIdauxiliar()
                         + " AND " + complemento_transaction_type + " ORDER BY fecha DESC LIMIT  " + count;
             }
-
-            System.out.println("CONSULTA: " + con + sulta);
+            
+            System.out.println("Consulta Test: "+ con + sulta);
+            Query qqq=em.createNativeQuery(con + sulta);
+            
+            Query query = em.createNativeQuery(con + sulta, AuxiliaresD.class);
+            listaContador = query.getResultList();
+            System.out.println("TOTAL REGISTROS H: " + listaContador.size());
+            
+            qqq.setFirstResult(inicio_busqueda);
+            qqq.setMaxResults(pageSize);
+            
+            List<Object[]>objetos = qqq.getResultList();
+            for (Object[]ob:objetos) {
+                Auxiliares_dDTO adto = new Auxiliares_dDTO();
+                
+                AuxiliaresDPK adpx = new AuxiliaresDPK();
+                adpx.setIdorigenp((int) ob[0]);
+                adpx.setIdproducto((int) ob[1]);
+                adpx.setIdauxiliar((int) ob[2]);
+                adpx.setFecha((Date) ob[3]);
+                
+                adto.setAuxiliaresDPK(adpx);
+                adto.setCargoabono(Short.valueOf(ob[4].toString()));
+                adto.setMonto((BigDecimal) ob[5]);
+                adto.setMontoio((BigDecimal) ob[6]);
+                adto.setMontoim((BigDecimal) ob[7]);
+                adto.setMontoiva((BigDecimal) ob[8]);
+                adto.setIdorigenc((Integer) ob[9]);
+                adto.setPeriodo((String) ob[10]);
+                adto.setIdtipo(Short.valueOf(ob[11].toString()));
+                adto.setIdpoliza((Integer) ob[12]);
+                adto.setTipomov(Short.valueOf(ob[13].toString()));
+                adto.setSaldoec((BigDecimal) ob[14]);
+                adto.setTransaccion((Integer) ob[15]);
+                adto.setMontoivaim((BigDecimal) ob[16]);
+                adto.setEfectivo((BigDecimal) ob[17]);
+                adto.setDiasvencidos((int) ob[18]);
+                adto.setMontovencido((BigDecimal) ob[19]);
+                adto.setTicket((Integer) ob[20]);
+                adto.setMontoidnc((BigDecimal) ob[21]);
+                adto.setMontoieco((BigDecimal) ob[22]);
+                adto.setMontoidncm((BigDecimal) ob[23]);
+                adto.setMontoiecom((BigDecimal) ob[24]);
+                adto.setTotal_lista(listaContador.size());
+                listaDTO.add(adto);
+            }
+            
+            /*System.out.println("CONSULTA: " + con + sulta);
             Query query = em.createNativeQuery(con + sulta, AuxiliaresD.class);
             listaContador = query.getResultList();
             System.out.println("TOTAL REGISTROS H: " + listaContador.size());
@@ -432,7 +498,7 @@ public abstract class FacadeAccounts<T> {
                 adto.setMontoiecom(aux.get(y).getMontoiecom());
                 adto.setTotal_lista(listaContador.size());
                 listaDTO.add(adto);
-            }
+            }*/
             //lista = query.getResultList();
         } catch (Exception e) {
             System.out.println("Error al leer transacciones:" + e.getMessage());
@@ -702,6 +768,10 @@ public abstract class FacadeAccounts<T> {
                     String cade = ruta();
                     System.out.println("Cade:" + cade.replace("\\", "/"));
                     linea = linea.replace("/usr/local/saicoop/img_estado_cuenta_ahorros/", cade.replace("\\", "/"));
+                } else if (linea.contains("/usr/local/saicoop/img_estado_cuenta_prestamos/")) {
+                    String cade = ruta();
+                    System.out.println("Cade:" + cade.replace("\\", "/"));
+                    linea = linea.replace("/usr/local/saicoop/img_estado_cuenta_prestamos/", cade.replace("\\", "/"));
                 }
                 if (linea.contains(" & ")) {
                     System.out.println("si tele");

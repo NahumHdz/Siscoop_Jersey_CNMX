@@ -238,6 +238,7 @@ public class AccountsResources {
     @Consumes({MediaType.APPLICATION_JSON})
     public Response History(String cadena, @HeaderParam("authorization") String authString) {
         Security scr = new Security();
+        System.out.println("CADENA HISTORY: " + cadena);
 
         if (!scr.isUserAuthenticated(authString)) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
@@ -296,6 +297,8 @@ public class AccountsResources {
             String fe = "";
             double monto = 0.0;
             String referencia = "";
+            String pol = "";
+            String descrip = "";
             int to_reg = 0;
             for (int j = 0; j < lista.size(); j++) {
                 to_reg = lista.get(j).getTotal_lista();
@@ -303,19 +306,44 @@ public class AccountsResources {
                 /*fechaDate = formato.parse(String.valueOf(ax.getAuxiliaresDPK().getFecha()).substring(0, 10));
                 fe = sdf.format(fechaDate);*/
                 fe = sdf.format(ax.getAuxiliaresDPK().getFecha());
-                System.out.println("Fe:" + fe + " " + ax.getCargoabono() + " " + ax.getMonto());
+                System.out.println("REGISTROS " + " Fecha: " + fe + " CargoAbono: " + ax.getCargoabono() + " Monto: " + ax.getMonto() + " Saldoec " + ax.getSaldoec());
 
                 ZonedDateTime zonedDateTime = ZonedDateTime.parse(fe.replace("/", "-") + "T00:00:00.000-06:00");
                 String feR = String.valueOf(zonedDateTime);
                 //System.out.println("DTOCtaOrigen:" + dto.getCuentaorigen());
                 referencia = ax.getIdorigenc() + "-" + ax.getPeriodo() + "-" + ax.getIdtipo() + "-" + ax.getIdpoliza();
+                //Descripcion poliza
+                String o = String.format("%06d", ax.getIdorigenc()), t = String.format("%02d", ax.getIdtipo()), p = String.format("%05d", ax.getIdpoliza());
+                pol = o + "-" + t + "-" + p;
                 //Pintamos los saldos + y -s 
                 if (ax.getCargoabono() == 0) {
                     monto = -ax.getMonto().doubleValue();
                 } else if (ax.getCargoabono() == 1) {
                     monto = ax.getMonto().doubleValue();
                 }
-                javax.json.JsonObject jsi = Json.createObjectBuilder().add("transactionId", referencia.replace("-", "")).add("amount", Json.createObjectBuilder().add("amount", monto).add("currencyCode", "MXN").build()).add("postingDate", feR).add("valueDate", fe.replace("/", "-")).add("runningBalance", Json.createObjectBuilder().add("amount", ax.getSaldoec()).add("currencyCode", "MXN").build()).add("description", ax.getTicket()).add("originatorReferenceId", referencia).add("originatorCode", referencia.replace("-", "")).add("description2", Json.createObjectBuilder().add("value", referencia.replace("-", "")).add("valueType", "string").add("isSensitive", false).build()).build();
+                //Descripcion
+                if (ax.getCargoabono()==0) {
+                    descrip = "RETIRO";
+                } else if (ax.getCargoabono()==1) {
+                    descrip = "DEPÓSITO";
+                }
+                javax.json.JsonObject jsi = Json.createObjectBuilder().add("transactionId", referencia.replace("-", ""))
+                                                                                                  .add("amount", Json.createObjectBuilder()
+                                                                                                          .add("amount", monto)
+                                                                                                          .add("currencyCode", "MXN").build())
+                                                                                                  .add("postingDate", feR)
+                                                                                                  .add("valueDate", fe.replace("/", "-"))
+                                                                                                  .add("runningBalance", Json.createObjectBuilder()
+                                                                                                          .add("amount", ax.getSaldoec())
+                                                                                                          .add("currencyCode", "MXN").build())
+                                                                                                  /*.add("description", ax.getTicket())*/
+                                                                                                  .add("description", descrip)
+                                                                                                  .add("originatorReferenceId", referencia)
+                                                                                                  .add("originatorCode", pol) /*referencia.replace("-", "")*/
+                                                                                                  .add("description2", Json.createObjectBuilder()
+                                                                                                          .add("value", pol) /*referencia.replace("-", "")*/
+                                                                                                          .add("valueType", "string")
+                                                                                                          .add("isSensitive", false).build()).build();
                 listaJson.add(jsi);
 
             }

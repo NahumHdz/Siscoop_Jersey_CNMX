@@ -446,11 +446,11 @@ public class CustomerResources {
         }
 
         try {
-
-            List<String[]> listad = dao.positionHistory0(customerId, fecha1.trim().replace("-", "/"), fecha2.trim().replace("-", "/"));
-            for (int i = 0; i < listad.size(); i++) {
+            /*List<String[]> listad = dao.positionHistory0(customerId, fecha1.trim().replace("-", "/"), fecha2.trim().replace("-", "/"));*/
+            List<String[]> lista = dao.positionHistory2(customerId, fecha1.trim().replace("-", "/"), fecha2.trim().replace("-", "/"));
+            for (int i = 0; i < lista.size(); i++) {
                 String arrs[] = new String[3];
-                arrs = listad.get(i);
+                arrs = lista.get(i);
 
                 javax.json.JsonObject clientes1 = Json.createObjectBuilder()
                         .add("balanceType", "ledger")
@@ -466,7 +466,12 @@ public class CustomerResources {
                                 .add("currencyCode", "MXN")
                                 .build())
                         .build();
-                jsona.add(Json.createObjectBuilder().add("currencyCode", "MXN").add("balances", Json.createArrayBuilder().add((JsonValue) clientes1).add((JsonValue) clientes2)).add("positionDate", arrs[2].replace("/", "-")));
+                jsona.add(Json.createObjectBuilder()
+                        .add("currencyCode", "MXN")
+                        .add("balances", Json.createArrayBuilder()
+                                .add((JsonValue) clientes1)
+                                .add((JsonValue) clientes2))
+                        .add("positionDate", arrs[2].replace("/", "-")));
             }
             json1 = Json.createObjectBuilder().add("records", jsona).build();
 

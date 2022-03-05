@@ -487,6 +487,31 @@ public abstract class FacadeCustomer<T> {
         return saldos;
     }
 
+    public List<String[]> positionHistory2(String customerId, String fecha1, String fecha2) {
+        EntityManager em = AbstractFacade.conexion();
+        ogsDTO ogs = Util.ogs(customerId);
+        List<String[]> lista_d = new ArrayList();
+        try {
+            //Buscamos la lista de movimientos del socio en las fechas que esta ingresando
+            String saldo_diario = "SELECT * FROM saldos_diarios(" + ogs.getIdorigen() + "," + ogs.getIdgrupo() + "," + ogs.getIdsocio() + ",'" + fecha1 + "','" + fecha2 + "')";
+            System.out.println("Consulta: " + saldo_diario);
+            Query sal_dia = em.createNativeQuery(saldo_diario);
+            
+            List<Object[]>objetos = sal_dia.getResultList();
+            for (Object[]ob:objetos) {
+                System.out.println("EN LA FECHA " + ob[0] + " EL SALDO DISPONIBLE FUE DE: " + ob[2] + " EL SALDO TOTAL: " + ob[1]);
+                String arr[] = new String[3];
+                arr[0] = String.valueOf(ob[2]);
+                arr[1] = String.valueOf(ob[1]);
+                arr[2] = String.valueOf(ob[0]);
+                lista_d.add(arr);
+            }
+        } catch (Exception e) {
+            System.out.println("Error en postionHistory:" + e.getMessage());
+        }
+        return lista_d;
+    }
+
     public List<String[]> positionHistory0(String customerId, String fecha1, String fecha2) {
         EntityManager em = AbstractFacade.conexion();
         ogsDTO ogs = Util.ogs(customerId);
