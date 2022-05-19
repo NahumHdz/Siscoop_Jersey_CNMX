@@ -52,11 +52,11 @@ public class ProductsResources {
         JsonObject Error = new JsonObject();
         ProductsDAO pr = new ProductsDAO();
 
-        if (!pr.actividad_horario()) {
+        /*if (!pr.actividad_horario()) {
             Error.put("ERROR", "VERIFIQUE SU HORARIO DE ACTIVIDAD FECHA, HORA O CONTACTE A SU PROVEEEDOR");
             System.out.println("HORARIO ACTIVIDAD: " + Error);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Error).build();
-        }
+        }*/
 
         try {
             System.out.println("dentro del try");
@@ -144,11 +144,11 @@ public class ProductsResources {
         JsonObject Error = new JsonObject();
         ProductsDAO dao = new ProductsDAO();
 
-        if (!dao.actividad_horario()) {
+        /*if (!dao.actividad_horario()) {
             Error.put("ERROR", "VERIFIQUE SU HORARIO DE ACTIVIDAD FECHA, HORA O CONTACTE A SU PROVEEEDOR");
             System.out.println("HORARIO ACTIVIDAD: " + Error);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Error).build();
-        }
+        }*/
 
         try {
             String accountType = "", customerId = "", productCode = "";

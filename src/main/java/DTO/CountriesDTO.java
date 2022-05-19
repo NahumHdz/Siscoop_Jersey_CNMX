@@ -10,7 +10,7 @@ package DTO;
  * @author Elliot
  */
 public class CountriesDTO {
-    
+
     private String code;
     private String name;
 
@@ -42,7 +42,5 @@ public class CountriesDTO {
     public String toString() {
         return "CountriesDTO{" + "code=" + code + ", name=" + name + '}';
     }
-    
-    
-    
+
 }

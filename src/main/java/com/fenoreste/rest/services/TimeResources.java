@@ -40,11 +40,11 @@ public class TimeResources {
         AccountsDAO dao = new AccountsDAO();
         JSONObject jsonRecibido = new JSONObject(cadena);
 
-        if (!dao.actividad_horario()) {
+        /*if (!dao.actividad_horario()) {
             Error.put("ERROR", "VERIFIQUE SU HORARIO DE ACTIVIDAD FECHA, HORA O CONTACTE A SU PROVEEEDOR");
             System.out.println("HORARIO ACTIVIDAD: " + Error);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Error).build();
-        }
+        }*/
 
         try {
             Calendar c1 = Calendar.getInstance();
@@ -78,11 +78,11 @@ public class TimeResources {
         JsonObject Error = new JsonObject();
         AccountsDAO dao = new AccountsDAO();
 
-        if (!dao.actividad_horario()) {
+        /*if (!dao.actividad_horario()) {
             Error.put("ERROR", "VERIFIQUE SU HORARIO DE ACTIVIDAD FECHA, HORA O CONTACTE A SU PROVEEEDOR");
             System.out.println("HORARIO ACTIVIDAD: " + Error);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Error).build();
-        }
+        }*/
 
         try {
             javax.json.JsonObject found = Json.createObjectBuilder()
@@ -114,11 +114,11 @@ public class TimeResources {
         JsonObject Error = new JsonObject();
         AccountsDAO dao = new AccountsDAO();
 
-        if (!dao.actividad_horario()) {
+        /*if (!dao.actividad_horario()) {
             Error.put("ERROR", "VERIFIQUE SU HORARIO DE ACTIVIDAD FECHA, HORA O CONTACTE A SU PROVEEEDOR");
             System.out.println("HORARIO ACTIVIDAD: " + Error);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Error).build();
-        }
+        }*/
 
         JSONObject jsonRecibido = new JSONObject(cadena);
         Calendar c1 = Calendar.getInstance();
@@ -172,11 +172,11 @@ public class TimeResources {
         JsonObject Error = new JsonObject();
         AccountsDAO dao = new AccountsDAO();
 
-        if (!dao.actividad_horario()) {
+        /*if (!dao.actividad_horario()) {
             Error.put("ERROR", "VERIFIQUE SU HORARIO DE ACTIVIDAD FECHA, HORA O CONTACTE A SU PROVEEEDOR");
             System.out.println("HORARIO ACTIVIDAD: " + Error);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Error).build();
-        }
+        }*/
 
         JSONObject jsonRecibido = new JSONObject(cadena);
         Calendar c1 = Calendar.getInstance();

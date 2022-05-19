@@ -16,14 +16,14 @@ public class OrderWsSPEI {
     private String RfcCurpSolicitate;
     private String ClabeSolicitante;
     private String CorreoElectronicoSolicitante;
-    
+
     private String NombreBeneficiario;
     private int TipoCuentaBeneficiario;
     private String CuentaTarjetaBeneficiario;
     private String RfcCurpBeneficario;
     private int InstitucionContraparte;
     private String CorreoElectronicoBeneficiario;
-    
+
     private Double monto;
     private Double IVA;
     private Double comision;
@@ -32,8 +32,6 @@ public class OrderWsSPEI {
 
     public OrderWsSPEI() {
     }
-
-    
 
     public String getCIF() {
         return CIF;
@@ -162,8 +160,5 @@ public class OrderWsSPEI {
     public void setNumeroReferencia(Integer numeroReferencia) {
         this.numeroReferencia = numeroReferencia;
     }
-    
-    
-    
 
 }

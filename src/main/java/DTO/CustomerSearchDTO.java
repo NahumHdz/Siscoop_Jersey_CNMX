@@ -11,8 +11,8 @@ import java.io.Serializable;
  *
  * @author wilmer
  */
-public class CustomerSearchDTO implements Serializable{
-    
+public class CustomerSearchDTO implements Serializable {
+
     private String customerId;
     private String name;
     private String taxId;
@@ -74,4 +74,5 @@ public class CustomerSearchDTO implements Serializable{
     public String toString() {
         return "customerDTO{" + "customerId=" + customerId + ", name=" + name + ", taxId=" + taxId + ", birthDate=" + birthDate + ", customerType=" + customerType + '}';
     }
+
 }

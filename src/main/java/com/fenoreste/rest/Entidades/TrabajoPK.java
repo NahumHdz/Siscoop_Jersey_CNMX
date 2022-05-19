@@ -15,14 +15,15 @@ import javax.persistence.Embeddable;
  * @author wilmer
  */
 @Cacheable(false)
- @Embeddable
- public class TrabajoPK implements Serializable {
-   @Column(name = "idorigen")
-   private String idtorigen;   
-   @Column(name = "idgrupo")
-   private String idgrupo; 
-   @Column(name = "idsocio")
-   private String idsocio; 
+@Embeddable
+public class TrabajoPK implements Serializable {
+
+    @Column(name = "idorigen")
+    private String idtorigen;
+    @Column(name = "idgrupo")
+    private String idgrupo;
+    @Column(name = "idsocio")
+    private String idsocio;
 
     public TrabajoPK() {
     }
@@ -56,7 +57,5 @@ import javax.persistence.Embeddable;
     public void setIdsocio(String idsocio) {
         this.idsocio = idsocio;
     }
-   
-   
-   
+
 }

@@ -20,7 +20,6 @@ import javax.persistence.Table;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 @Entity
 @Table(name = "datos_temporales_alertas")
 public class datos_temporales_alertas implements Serializable {

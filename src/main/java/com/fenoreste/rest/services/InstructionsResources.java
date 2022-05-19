@@ -147,7 +147,7 @@ public class InstructionsResources {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
         JSONObject request = new JSONObject(cadena);
-        String customerId = "", tipoTranferencia = "", cuentaOrigen = "", cuentaDestino = "", comentario = "", propCuenta = "", fechaEjecucion = "", tipoEjecucion = "";
+        String customerId = "", tipoTranferencia = "", cuentaOrigen = "", cuentaDestino = "", comentario = "", propCuenta = "", fechaEjecucion = "", tipoEjecucion = "", frecuencia_tran = "";
         Double monto = 0.0;
         String value = "";
         boolean bandera1 = false, bandera2 = false;
@@ -161,7 +161,9 @@ public class InstructionsResources {
         JSONObject mon_op = request.getJSONObject("monetaryOptions");
         JSONObject fec_exe = mon_op.getJSONObject("execution");
         fechaEjecucion = fec_exe.getString("executionDate");
-        //System.out.println("FECHA EJECUCIONNNNNNNNNNNNNNNNNNNN: " + fechaEjecucion);
+        
+        JSONObject freq = mon_op.getJSONObject("frequency");
+        frecuencia_tran = freq.getString("frequencyType");
 
         try {
             //Transferencias TIPOS BILLER(Pago de servicios)
@@ -270,10 +272,12 @@ public class InstructionsResources {
         }
 
         try {
-            System.out.println("FECHA HOY:  " + FechaTiempoReal + " FECHA EJECUCION: " + fechaEjecucion);
+            System.out.println("FECHA HOY:  " + FechaTiempoReal + " FECHA EJECUCION: " + fechaEjecucion + " FRECUENCIA TRANSACCION: " + frecuencia_tran);
             
-            if (FechaTiempoReal.equals(fechaEjecucion)) {
-                System.out.println("FECHAS IGUALES");
+            if (FechaTiempoReal.equals(fechaEjecucion) && frecuencia_tran.equals("none")) {
+                System.out.println("FECHAS IGUALES Y TRANSFERENCIA NORMAL");
+                
+                //if (frecuencia_tran.toUpperCase().contains("none"))
                 
                 //Es una transferencia a mis cuentas propias
                 if (identificadorTransferencia == 1) {
@@ -329,12 +333,12 @@ public class InstructionsResources {
                             .build();
                 }
             } else {
-                System.out.println("FECHAS DIFERENTES");
+                System.out.println("FECHAS DIFERENTES O TRANSFERENCIA PROGRAMADA");
                 jsonResponse = Json.createObjectBuilder().add("type", "urn:vn:error-codes:VAL00001")
                                                                                     .add("title", "Validation failed on submitted data")
                                                                                     .add("errors", (JsonValue) Json.createArrayBuilder()
                                                                                             .add((JsonValue) Json.createObjectBuilder()
-                                                                                                    .add("code", "W0015")
+                                                                                                    .add("code", "AP09978") /*.add("code", "W0015")*/
                                                                                                     .add("message", "Fecha de ejecución inválida").build()).build())
                                                                                     .build();
             }

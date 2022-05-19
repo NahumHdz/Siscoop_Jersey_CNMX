@@ -10,7 +10,7 @@ package DTO;
  * @author nahum
  */
 public class opaDTO {
-    
+
     private int idorigenp;
     private int idproducto;
     private int idauxiliar;
@@ -52,5 +52,5 @@ public class opaDTO {
     public String toString() {
         return "opaDTO{" + "idorigenp=" + idorigenp + ", idproducto=" + idproducto + ", idauxiliar=" + idauxiliar + '}';
     }
-    
+
 }

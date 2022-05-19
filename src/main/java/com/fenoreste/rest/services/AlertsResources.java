@@ -38,11 +38,11 @@ public class AlertsResources {
         JsonObject Error = new JsonObject();
         AlertsDAO dao = new AlertsDAO();
 
-        if (!dao.actividad_horario()) {
+        /*if (!dao.actividad_horario()) {
             Error.put("ERROR", "VERIFIQUE SU HORARIO DE ACTIVIDAD FECHA, HORA O CONTACTE A SU PROVEEEDOR");
             System.out.println("HORARIO ACTIVIDAD: " + Error);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Error).build();
-        }
+        }*/
 
         String AlercustomerId_ = "", Alertcode_ = "", AlertAccountId_ = "";
         JSONArray rules_ = null;
@@ -116,11 +116,11 @@ public class AlertsResources {
         JsonObject Error = new JsonObject();
         AlertsDAO dao = new AlertsDAO();
 
-        if (!dao.actividad_horario()) {
+        /*if (!dao.actividad_horario()) {
             Error.put("ERROR", "VERIFIQUE SU HORARIO DE ACTIVIDAD FECHA, HORA O CONTACTE A SU PROVEEEDOR");
             System.out.println("HORARIO ACTIVIDAD: " + Error);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Error).build();
-        }
+        }*/
 
         try {
             String validationId = jsonRecibido.getString("validationId");

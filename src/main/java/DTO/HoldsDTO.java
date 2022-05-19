@@ -10,7 +10,7 @@ package DTO;
  * @author Elliot
  */
 public class HoldsDTO {
-    
+
     private String holdId;
     private Double amount;
     private String entryDate;
@@ -62,7 +62,5 @@ public class HoldsDTO {
     public String toString() {
         return "HoldsDTO{" + "holdId=" + holdId + ", amount=" + amount + ", entryDate=" + entryDate + ", descritpion=" + descritpion + '}';
     }
-    
-    
-    
+
 }

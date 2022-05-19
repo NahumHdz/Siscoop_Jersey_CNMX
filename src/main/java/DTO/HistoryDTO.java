@@ -10,10 +10,10 @@ package DTO;
  * @author nahum
  */
 public class HistoryDTO {
-    
+
     private String transactionId;
     private Double amount;
     private String postingDate;//Fecha de activacion
     private String fechaEjecucion;//
-    
+
 }

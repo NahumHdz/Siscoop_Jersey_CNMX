@@ -10,7 +10,7 @@ package DTO;
  * @author Elliot
  */
 public class AccountHoldersDTO {
-    
+
     private String name;
     private String relationCode;
 
@@ -42,8 +42,5 @@ public class AccountHoldersDTO {
     public String toString() {
         return "AccountHoldersDTO{" + "name=" + name + ", relationCode=" + relationCode + '}';
     }
-    
-    
-   
-    
+
 }

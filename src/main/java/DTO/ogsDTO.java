@@ -10,7 +10,7 @@ package DTO;
  * @author nahum
  */
 public class ogsDTO {
-    
+
     private int idorigen;
     private int idgrupo;
     private int idsocio;
@@ -52,5 +52,5 @@ public class ogsDTO {
     public String toString() {
         return "ogsDTO{" + "idorigen=" + idorigen + ", idgrupo=" + idgrupo + ", idsocio=" + idsocio + '}';
     }
-    
+
 }

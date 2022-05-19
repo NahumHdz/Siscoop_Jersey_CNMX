@@ -10,7 +10,7 @@ package DTO;
  * @author wilmer
  */
 public class MonetaryInstructionDTO {
-    
+
     private String debitAccount;
     private String creditAccount;
     private Double monto;
@@ -92,8 +92,5 @@ public class MonetaryInstructionDTO {
     public String toString() {
         return "MonetaryInstructionDTO{" + "debitAccount=" + debitAccount + ", creditAccount=" + creditAccount + ", monto=" + monto + ", typeNameId=" + typeNameId + ", executionDate=" + executionDate + ", originatorTransactionType=" + originatorTransactionType + ", monetaryId=" + monetaryId + '}';
     }
-    
-    
-    
-        
+
 }

@@ -10,7 +10,7 @@ package DTO;
  * @author wilmer
  */
 public class CustomerContactDetailsDTO {
-    
+
     private String customerContactId;
     private String customerContactType;
     public String phoneNumber;
@@ -72,7 +72,5 @@ public class CustomerContactDetailsDTO {
     public String toString() {
         return "CustomerContactDetails{" + "customerContactId=" + customerContactId + ", customerContactType=" + customerContactType + ", phoneNumber=" + phoneNumber + ", cellphoneNumber=" + cellphoneNumber + ", email=" + email + '}';
     }
-    
-    
 
 }

@@ -35,10 +35,16 @@ public class transferencias_completadas_siscoop implements Serializable {
 
     private Double runningBalance;
 
+    private String validationid;
+
+    private Integer transaccionorigen;
+
+    private Integer transacciondestino;
+
     public transferencias_completadas_siscoop() {
     }
 
-    public transferencias_completadas_siscoop(String customerId, String tipotransferencia, String cuentaorigen, String cuentadestino, Double monto, String comentario1, String comentario2, Date fechaejecucion, String tipoejecucion, boolean estatus, Double runningBalance) {
+    public transferencias_completadas_siscoop(String customerId, String tipotransferencia, String cuentaorigen, String cuentadestino, Double monto, String comentario1, String comentario2, Date fechaejecucion, String tipoejecucion, boolean estatus, Double runningBalance, String validationid, Integer transaccionorigen, Integer transacciondestino) {
         this.customerId = customerId;
         this.tipotransferencia = tipotransferencia;
         this.cuentaorigen = cuentaorigen;
@@ -50,6 +56,9 @@ public class transferencias_completadas_siscoop implements Serializable {
         this.tipoejecucion = tipoejecucion;
         this.estatus = estatus;
         this.runningBalance = runningBalance;
+        this.validationid = validationid;
+        this.transaccionorigen = transaccionorigen;
+        this.transacciondestino = transacciondestino;
     }
 
     public String getCustomerId() {
@@ -140,9 +149,33 @@ public class transferencias_completadas_siscoop implements Serializable {
         this.runningBalance = runningBalance;
     }
 
+    public String getValidationid() {
+        return validationid;
+    }
+
+    public void setValidationid(String validationid) {
+        this.validationid = validationid;
+    }
+
+    public Integer getTransaccionorigen() {
+        return transaccionorigen;
+    }
+
+    public void setTransaccionorigen(Integer transaccionorigen) {
+        this.transaccionorigen = transaccionorigen;
+    }
+
+    public Integer getTransacciondestino() {
+        return transacciondestino;
+    }
+
+    public void setTransacciondestino(Integer transacciondestino) {
+        this.transacciondestino = transacciondestino;
+    }
+
     @Override
     public String toString() {
-        return "transferencias_completadas_siscoop{" + "customerId=" + customerId + ", tipotransferencia=" + tipotransferencia + ", cuentaorigen=" + cuentaorigen + ", cuentadestino=" + cuentadestino + ", monto=" + monto + ", comentario1=" + comentario1 + ", comentario2=" + comentario2 + ", fechaejecucion=" + fechaejecucion + ", tipoejecucion=" + tipoejecucion + ", estatus=" + estatus + ", runningBalance=" + runningBalance + '}';
+        return "transferencias_completadas_siscoop{" + "customerId=" + customerId + ", tipotransferencia=" + tipotransferencia + ", cuentaorigen=" + cuentaorigen + ", cuentadestino=" + cuentadestino + ", monto=" + monto + ", comentario1=" + comentario1 + ", comentario2=" + comentario2 + ", fechaejecucion=" + fechaejecucion + ", tipoejecucion=" + tipoejecucion + ", estatus=" + estatus + ", runningBalance=" + runningBalance + ", validationid=" + validationid + ", transaccionorigen=" + transaccionorigen + ", transacciondestino=" + transacciondestino + '}';
     }
 
 }

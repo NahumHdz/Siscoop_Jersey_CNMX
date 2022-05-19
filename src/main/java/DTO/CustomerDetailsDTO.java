@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,13 +10,13 @@ package DTO;
  * @author wilmer
  */
 public class CustomerDetailsDTO {
-      
-      private String nationalId;
-      private String birthDate;
-      private String customerId;
-      private String name;
-      private String customerType;
-      private String taxId;
+
+    private String nationalId;
+    private String birthDate;
+    private String customerId;
+    private String name;
+    private String customerType;
+    private String taxId;
 
     public CustomerDetailsDTO() {
     }
@@ -82,7 +82,5 @@ public class CustomerDetailsDTO {
     public String toString() {
         return "CustomerDetailsDTO{" + "nationalId=" + nationalId + ", birthDate=" + birthDate + ", customerId=" + customerId + ", name=" + name + ", customerType=" + customerType + ", taxId=" + taxId + '}';
     }
-      
-     
-    
+
 }

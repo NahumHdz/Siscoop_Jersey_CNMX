@@ -39,11 +39,11 @@ public class ValidateBeneficiary {
         JsonObject Error = new JsonObject();
         AccountsDAO acDao = new AccountsDAO();
 
-        if (!acDao.actividad_horario()) {
+        /*if (!acDao.actividad_horario()) {
             Error.put("ERROR", "VERIFIQUE SU HORARIO DE ACTIVIDAD FECHA, HORA O CONTACTE A SU PROVEEEDOR");
             System.out.println("HORARIO ACTIVIDAD: " + Error);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Error).build();
-        }
+        }*/
 
         String accountId = "";
         System.out.println("Cadena:" + cadena);

@@ -10,7 +10,7 @@ package DTO;
  * @author Elliot
  */
 public class validateMonetaryInstructionDTO {
-    
+
     private String validationId;
     private String[] fees;
     private String executionDate;
@@ -52,6 +52,5 @@ public class validateMonetaryInstructionDTO {
     public String toString() {
         return "validateMonetaryInstructionDTO{" + "validationId=" + validationId + ", fees=" + fees + ", executionDate=" + executionDate + '}';
     }
-    
-    
+
 }

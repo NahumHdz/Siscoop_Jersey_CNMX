@@ -10,7 +10,7 @@ package DTO;
  * @author Elliot
  */
 public class StatementsDTO {
-    
+
     private String statementId;
     private String initialDate;
     private String finalDate;
@@ -72,8 +72,5 @@ public class StatementsDTO {
     public String toString() {
         return "StatementsDTO{" + "statementId=" + statementId + ", initialDate=" + initialDate + ", finalDate=" + finalDate + ", displayAccountNumber=" + displayAccountNumber + ", idpdf=" + idpdf + '}';
     }
-    
-    
-    
-    
+
 }

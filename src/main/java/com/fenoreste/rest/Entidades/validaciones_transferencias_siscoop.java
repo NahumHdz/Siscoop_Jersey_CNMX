@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class validaciones_transferencias_siscoop implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     private String customerId;
 
     private String tipotransferencia;
@@ -33,7 +33,7 @@ public class validaciones_transferencias_siscoop implements Serializable {
     private String tipoejecucion;
 
     private boolean estatus;
-    
+
     @Id
     private String validationId;
 

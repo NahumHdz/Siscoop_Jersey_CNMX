@@ -10,6 +10,7 @@ package DTO;
  * @author wilmer
  */
 public class CustomerAccountDTO {
+
     private String accountId;
     private String accountNumber;
     private String displayAccountNumber;
@@ -19,7 +20,6 @@ public class CustomerAccountDTO {
     private String status;
     private Object[] restrictions;
     private Object[] customerRelations;
-    
 
     public CustomerAccountDTO() {
     }
@@ -93,7 +93,7 @@ public class CustomerAccountDTO {
     }
 
     public Object[] getRestrictions() {
-       return restrictions;
+        return restrictions;
     }
 
     public void setRestrictions(Object[] restrictions) {
@@ -113,7 +113,4 @@ public class CustomerAccountDTO {
         return "CustomerAccountDTO{" + "accountId=" + accountId + ", accountNumber=" + accountNumber + ", displayAccountNumber=" + displayAccountNumber + ", accountTye=" + accountTye + ", currencyCode=" + currencyCode + ", productCode=" + productCode + ", status=" + status + ", restrictions=" + restrictions + ", customerRelations=" + customerRelations + '}';
     }
 
-    
-    
-   
 }

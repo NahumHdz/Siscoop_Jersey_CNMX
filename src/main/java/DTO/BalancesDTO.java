@@ -10,6 +10,7 @@ package DTO;
  * @author wilmer
  */
 public class BalancesDTO {
+
     private String accountId;
     private Double ledger;
     private Double avalaible;
@@ -51,6 +52,5 @@ public class BalancesDTO {
     public String toString() {
         return "BalancesDTO{" + "accountId=" + accountId + ", ledger=" + ledger + ", avalaible=" + avalaible + '}';
     }
-    
-    
+
 }

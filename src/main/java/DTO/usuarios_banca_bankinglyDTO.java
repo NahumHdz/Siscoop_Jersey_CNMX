@@ -10,8 +10,7 @@ package DTO;
  * @author wilmer
  */
 public class usuarios_banca_bankinglyDTO {
-    
-    
+
     private int id;
     private String username;
     private String socio;
@@ -30,7 +29,7 @@ public class usuarios_banca_bankinglyDTO {
     }
 
     public void setId(int id) {
-        this.id =id;
+        this.id = id;
     }
 
     public String getUsername() {
@@ -53,4 +52,5 @@ public class usuarios_banca_bankinglyDTO {
     public String toString() {
         return "usuarios_banca_bankingly{" + "id=" + id + ", username=" + username + ", socio=" + socio + '}';
     }
+
 }

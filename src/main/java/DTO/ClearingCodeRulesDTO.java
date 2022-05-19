@@ -10,7 +10,7 @@ package DTO;
  * @author Elliot
  */
 public class ClearingCodeRulesDTO {
-     
+
     private String countryCode;
     private String charsetType;
 
@@ -43,6 +43,4 @@ public class ClearingCodeRulesDTO {
         return "ClearingCodeRulesDTO{" + "countryCode=" + countryCode + ", charsetType=" + charsetType + '}';
     }
 
-    
-    
 }

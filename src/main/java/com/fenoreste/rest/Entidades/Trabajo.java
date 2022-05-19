@@ -334,7 +334,5 @@ public class Trabajo implements Serializable {
     public void setExt_tel_2(String ext_tel_2) {
         this.ext_tel_2 = ext_tel_2;
     }
-    
-    
 
 }

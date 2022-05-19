@@ -19,6 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "bankingly_movimientos_ca")
 public class Procesa_pago_movimientos implements Serializable {
+
     @EmbeddedId
     protected AuxiliaresPK auxiliaresPK;
     @Column(name = "fecha")
@@ -42,7 +43,7 @@ public class Procesa_pago_movimientos implements Serializable {
     @Column(name = "iva")
     private Double iva;
     @Column(name = "tipo_amort")
-    private Integer tipo_amort;   
+    private Integer tipo_amort;
     @Column(name = "sai_aux")
     private String sai_aux;
 
@@ -174,8 +175,6 @@ public class Procesa_pago_movimientos implements Serializable {
         return "Procesa_pago_movimientos{" + "auxiliaresPK=" + auxiliaresPK + ", fecha=" + fecha + ", idusuario=" + idusuario + ", sesion=" + sesion + ", referencia=" + referencia + ", idorigen=" + idorigen + ", idgrupo=" + idgrupo + ", idsocio=" + idsocio + ", cargoabono=" + cargoabono + ", monto=" + monto + ", iva=" + iva + ", tipo_amort=" + tipo_amort + ", sai_aux=" + sai_aux + '}';
     }
 
-    
     private static final long serialVersionUID = 1L;
 
-    
 }

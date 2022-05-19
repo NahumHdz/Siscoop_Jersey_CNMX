@@ -24,7 +24,6 @@ import javax.persistence.Table;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 @Entity
 @Table(name = "e_alertas")
 public class e_Alerts implements Serializable {

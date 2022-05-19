@@ -10,7 +10,7 @@ package DTO;
  * @author wilmer
  */
 public class ResponseCustomerPositionDTO {
-      
+
     private String customerId;
     private Double avalaible;
     private Double ledger;
@@ -52,6 +52,5 @@ public class ResponseCustomerPositionDTO {
     public String toString() {
         return "ResponseCustomerPositionDTO{" + "customerId=" + customerId + ", avalaible=" + avalaible + ", ledger=" + ledger + '}';
     }
-    
-    
+
 }
