@@ -64,7 +64,6 @@ public class AccountsResources {
         }*/
 
         try {
-
             listaHolders = dao.accountHolders(accountId);
             jsonb.put("holders", listaHolders);
             return Response.status(Response.Status.OK).entity(jsonb).build();
